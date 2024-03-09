@@ -3,7 +3,7 @@ import subprocess
 from generate_application import send_prompt
 
 # Path to the web scraping script
-web_scraper_script = '../WebScraping/main.py'
+web_scraper_script = '../WebScraping_autofill/main.py'
 
 # Run the web scraper to update scholarship data
 subprocess.run(['python', web_scraper_script], check=True)
