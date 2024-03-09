@@ -1,9 +1,10 @@
 import json
-import convertjsontocsv
+
+from server.WebScraping_AutoFill import convertjsontocsv
 from server.WebScraping_AutoFill.helpfunctions import *
 
 
-def main():
+def scrape_scholarships():
     id = 1
 
     main_url = 'https://www.scholarshipscanada.com/Scholarships/Browse-Scholarships.aspx'
@@ -32,15 +33,16 @@ def main():
 
     filtered_data = [item for item in scholarships_data if item is not None]
 
-    # Save the data to JSON
+    # Save the data to JSON and then read the first entry
     with open('scholarships_data.json', 'w') as f:
         json.dump(filtered_data, f, indent=4)
 
-    driver.quit()
+    # Now, reopen the file in read mode to load the first entry
+    with open('scholarships_data.json', 'r') as f:
+        first_entry = json.load(f)[0]
 
-    convertjsontocsv.load_json_data()
-    convertjsontocsv.convert_to_csv()
+    # ... rest of your code ...
 
-
-if __name__ == '__main__':
-    main()
+    return first_entry
+# if __name__ == '__main__':
+#     main()
