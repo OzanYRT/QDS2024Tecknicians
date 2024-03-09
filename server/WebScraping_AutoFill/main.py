@@ -1,6 +1,6 @@
 import json
 import convertjsontocsv
-from WebScraping_AutoFill.helpfunctions import *
+from server.WebScraping_AutoFill.helpfunctions import *
 
 
 def main():

@@ -4,58 +4,47 @@ import json
 client = OpenAI()
 
 
-# def send_prompt(schol_data):
-#     """
-#
-#
-#     :param schol_data:
-#     :return:
-#     """
-#     scholarship = json.loads(schol_data)
-#
-#     prompt = (
-#         f"Please create a scholarship application essay for the following scholarship:\n\n"
-#         f"Scholarship Name: {scholarship['name']}\n"
-#         f"Amount: {scholarship['amount']}\n"
-#         f"Deadline: {scholarship['deadline']}\n"
-#         f"Eligibility: {scholarship['notes']}\n"
-#         f"Link: {scholarship['link']}\n\n"
-#         f"Include why I am the best candidate for this scholarship based on my dedication to the field of {scholarship['fieldofstudy']}."
-#     )
-#
-#     completion = client.chat.completions.create(
-#         model="gpt-3.5-turbo",
-#         messages=[
-#             {"role": "system", "content": "You are an AI that assists in creating scholarship essays."},
-#             {"role": "user", "content": prompt}
-#         ]
-#     )
-#
-#     with open(filename, 'w') as file:
-#         file.write(essay)
-#
-#     return completion.choices[0].message
-#     # print(completion.choices[0].message)
-
-
-def test_prompt_processing():
+def send_prompt(scholarship_data, user_data):
     """
 
     :param schol_data:
     :return:
     """
+    scholarship = json.loads(scholarship_data)
+    user = json.loads(user_data)
 
-    essay = "test essay content"
+    prompt = (
+        f"Please create a scholarship application essay for the following scholarship:\n\n"
+        f"Scholarship Name: {scholarship['name']}\n"
+        f"Amount: {scholarship['amount']}\n"
+        f"Deadline: {scholarship['deadline']}\n"
+        f"Eligibility: {scholarship['notes']}\n"
+        f"Link: {scholarship['link']}\n\n"
+        f"Include why I am the best candidate for this scholarship based on my dedication to the field of {scholarship['fieldofstudy']}."
+    )
+
+    completion = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "system", "content": "You are an AI that assists in creating scholarship essays."},
+            {"role": "user", "content": prompt}
+        ]
+    )
+
+    essay = completion.choices[0].message['content']
 
     with open(filename, 'w') as file:
         file.write(essay)
 
-    # return completion.choices[0].message
+    # return essay
     # print(completion.choices[0].message)
 
 
-schol_data = '{"name": "Science Innovation Scholarship", "amount": "$2,000", "deadline": "August 1, 2024", "notes": "For students pursuing innovative research in renewable energy.", "link": "https://www.scholarshipportal.com/scholarship/science-innovation", "fieldofstudy": "Renewable Energy"}'
-user_info = {
+first_scholarship = scholarships[0] if scholarships else None
+schol_data_json = json.dumps(first_scholarship) if first_scholarship else "{}"
+
+
+user_info_json = {
   "name": "Harry",
   "address": "1234 Privet Drive",
   "phone": "123-456-7890",
@@ -89,9 +78,9 @@ user_info = {
 
 
 
-# essay = send_prompt(schol_data)
+essay = send_prompt(schol_data_json, user_info_json)
+print("The essay has been generated and saved to 'scholarship_essay.txt'.")
+
 # print(essay)
 
 filename = 'scholarship_essay.txt'
-test_prompt_processing()
-
