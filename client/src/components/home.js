@@ -1,14 +1,11 @@
-// create a home react component
-// Path: client/src/components/home.js
-import React, { useState } from 'react';
-import { Link } from "react-router-dom";
-import Navbar from "./navbar";
+import React from 'react';
+import SwipeInterface from './SwipeInterface'; 
 
 export default function Home() {
+  return (
+    <div>
 
- return (
-  <div>
-      <p>Hello World</p>
-  </div>
-);
+      <SwipeInterface /> {/* Render the SwipeInterface component */}
+    </div>
+  );
 }
