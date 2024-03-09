@@ -62,7 +62,7 @@ def perform_login(driver, username, password):
     driver.find_element(By.ID, "FooterControl_btnLogin").click()
 
 
-def scrape_scholarship_info(url, driver=None):
+def scrape_scholarship_info(id, url, driver=None):
     driver.get(url)
     soup = BeautifulSoup(driver.page_source, 'html.parser')
 
@@ -186,6 +186,7 @@ def scrape_scholarship_info(url, driver=None):
 
     link = url
     info = {
+        'id' : id,
         'name': name,
         'amount': amount,
         'deadline': deadline,
