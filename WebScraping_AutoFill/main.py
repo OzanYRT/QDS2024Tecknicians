@@ -1,15 +1,17 @@
 import json
 import convertjsontocsv
-from WebScraping.helpfunctions import *
+from WebScraping_AutoFill.helpfunctions import *
 
 
 def main():
+    id = 1
+
     main_url = 'https://www.scholarshipscanada.com/Scholarships/Browse-Scholarships.aspx'
     scholarships_data = []
 
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
     username = "MightyMights"  # Your actual username
-    password = "C87_TrV9pz*gLAC"  # Your actual password
+    password = "6qiwSQMaP4S5DsT"  # Your actual password
     perform_login(driver, username, password)
 
     # Proceed with further actions or scraping
@@ -21,8 +23,9 @@ def main():
         for i, scholarship_link in enumerate(scholarship_links):
             if i == 2:  # stop after processing 10 links
                 break
-            scholarship_info = scrape_scholarship_info(scholarship_link, driver)
+            scholarship_info = scrape_scholarship_info(id, scholarship_link, driver)
             scholarships_data.append(scholarship_info)
+            id += 1
         # for scholarship_link in scholarship_links:
         #     scholarship_info = scrape_scholarship_info(scholarship_link, driver)
         #     scholarships_data.append(scholarship_info)
