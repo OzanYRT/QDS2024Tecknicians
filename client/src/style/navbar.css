@@ -1,0 +1,50 @@
+/* Ensuring navbar links are stacked vertically on larger screens */
+@media (min-width: 992px) {
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 250px; /* Adjust based on your preference */
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      padding-top: 20px;
+    }
+    
+    /* Override Bootstrap's flex direction for navbar-nav */
+    .navbar-nav {
+      display: flex;
+      flex-direction: column !important; /* Force items to stack vertically */
+      width: 100%;
+    }
+    
+    .nav-item {
+      text-align: left;
+    }
+  
+    .nav-link {
+      padding-left: 20px; /* Adjust padding to align links */
+    }
+    
+    .navbar-collapse {
+      display: flex !important;
+      flex-direction: column !important; /* Ensure that navbar-collapse also follows the column direction */
+      align-items: start; /* Align items to the start */
+    }
+  }
+  
+  /* Adjustments for mobile view to ensure the hamburger menu works correctly */
+  @media (max-width: 991px) {
+    .navbar {
+      width: 100%;
+      height: auto;
+    }
+  
+    /* This ensures navbar-nav items are displayed inline in a row for mobile view */
+    .navbar-nav {
+      flex-direction: row !important;
+      justify-content: flex-end;
+    }
+  }
+  
