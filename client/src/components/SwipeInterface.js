@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
+
 import { useSwipeable } from 'react-swipeable';
+
+import { Link } from 'react-router-dom';
+
 import '../style/SwipeInterface.css';
 import scholarshipsData from '../data/scholarships.json';
 
 const SwipeInterface = () => {
+
     const [pods, setPods] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [cardStyle, setCardStyle] = useState({});
@@ -55,12 +60,32 @@ const SwipeInterface = () => {
     console.log(`Swiped ${direction} on:`, pods[currentIndex].name);
 
     // Check if there's a next card to show
+
+  const [pods, setPods] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0); // Added to keep track of the current card index
+
+  // Simulate fetching pods. In a real app, you might fetch this from an API or other data source
+  const fetchPods = async () => {
+    // Since you're using static data for this example, we directly set the data
+    setPods(scholarshipsData);
+  };
+
+  useEffect(() => {
+    fetchPods();
+  }, []);
+
+  const handleSwipe = (direction) => {
+    console.log(`Swiped ${direction} on:`, pods[currentIndex]);
+
+    // Move to the next card in the stack
+
     if (currentIndex < pods.length - 1) {
       setCurrentIndex(currentIndex + 1);
     } else {
       console.log("Reached the end of the stack!");
     }
   };
+
 
   useEffect(() => {
     setPods(scholarshipsData); // Directly set the static data for this example
@@ -71,12 +96,17 @@ const SwipeInterface = () => {
       <div id="stack" className="tinder--cards">
         {pods.length > 0 && currentIndex < pods.length ? (
           <div className="tinder--card" {...handlers} style={cardStyle}>
+
             <h3>{pods[currentIndex].name}</h3>
             <p>{pods[currentIndex].amount}</p>
             <p>Deadline: {pods[currentIndex].deadline}</p>
           </div>
         ) : (
+
           <div>No more scholarships.</div>
+
+          <p>Loading...</p>
+
         )}
       </div>
 
@@ -84,7 +114,9 @@ const SwipeInterface = () => {
         <button
           id="nope"
           className="button nope"
+
           onClick={() => moveCard('left')}
+
           disabled={currentIndex >= pods.length - 1}
         >
           Nope
@@ -92,7 +124,9 @@ const SwipeInterface = () => {
         <button
           id="love"
           className="button love"
+
           onClick={() => moveCard('right')}
+
           disabled={currentIndex >= pods.length - 1}
         >
           Love

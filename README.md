@@ -10,9 +10,9 @@ application based on the user info and the description for the scholarship.
 QDS 2024 Hackathon Project: 
 
 Project of:
-Laurie Solkoski
-Ben 
-Ashley
-Ozan
-Sukh
+Ashley Bilton
 Harrison de Jong
+Benny Li
+Sukhraj Sidhu
+Laurie Solkoski
+Ozan Yurtisigi
