@@ -9,7 +9,7 @@ def main():
 
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
     username = "MightyMights"  # Your actual username
-    password = "C87_TrV9pz*gLAC"  # Your actual password
+    password = "6qiwSQMaP4S5DsT"  # Your actual password
     perform_login(driver, username, password)
 
     # Proceed with further actions or scraping
