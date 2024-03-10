@@ -95,6 +95,7 @@ html, body {
   position: relative;
   overflow: hidden;
   border-radius: 20px;
+  margin-right: 80px;
 }
 
 .card-container .card-image {
@@ -219,6 +220,7 @@ html, body {
     &:not(:first-child) {
       display: none; 
     }
+    margin-left:-80px;
   }
 
   .tinder--buttons {
