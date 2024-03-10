@@ -1,0 +1,77 @@
+/* page1.css */
+
+/* General reset and styles */
+html, body {
+    margin-left: 120px;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center !important;
+    align-items: center !important;
+    background: linear-gradient(to bottom, #FF8737, #FF9B64);
+    font-family: 'Arial', sans-serif; /* Use your preferred font */
+  }
+
+
+  .interests-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center the tags container */
+    gap: 10px; /* Space between tags */
+    padding: 10px; /* Padding around the container */
+  }
+  
+  .interest-tag {
+    padding: 8px 16px;
+    border-radius: 20px; /* Rounded corners for tags */
+    font-size: 1rem;
+    color: white; /* Text color */
+    margin: 5px; /* Margin around tags */
+    white-space: nowrap; /* Prevents the text from wrapping */
+    cursor: default; /* Shows a default cursor on hover */
+  }
+  
+  
+  /* Styling for the centered card */
+  .user-details-card {
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+    backdrop-filter: blur(5px); /* Frosted glass effect */
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 450px; /* Maximum width of the card */
+    width: 90%; /* Use a percentage to make it responsive */
+    margin: 20px;
+    box-sizing: border-box;
+  }
+  
+  /* Style for error/loading messages */
+  .message {
+    color: white;
+    font-size: 1rem;
+    text-align: center;
+  }
+  
+  /* Headings and paragraphs within the card */
+  h1, p {
+    margin: 0.5rem 0;
+    text-align: center;
+  }
+  
+  /* Overrides for default link styles */
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .user-details-card {
+      padding: 1rem;
+      border-radius: 0.5rem;
+    }
+  }
+  
