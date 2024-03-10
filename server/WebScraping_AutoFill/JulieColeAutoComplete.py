@@ -74,7 +74,7 @@ def fill_form(driver):
     }
 
     try:
-        # Iterate through the mappings and fill the forms
+        # Iterate through the mappings and fill the form
         for json_key, form_field_name in field_mappings.items():
             field_value = form_data.get(json_key)
             if field_value:  # Check if the value is not None
