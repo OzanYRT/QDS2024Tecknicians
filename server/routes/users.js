@@ -118,4 +118,51 @@ router.get('/download_essay', (req, res) => {
   });
 });
 
+router.post('/add-scholarship', async (req, res) => {
+  const { email, scholarshipName } = req.body;
+  console.log(email)
+  console.log(scholarshipName)
+
+  if (!email || !scholarshipName) {
+    return res.status(400).send("Missing email or scholarship name.");
+  }
+
+  try {
+    // Add the scholarship to the user's document using $addToSet to avoid duplicates
+    const updatedUser = await User.findOneAndUpdate(
+      { email: email },
+      { $addToSet: { scholarships: scholarshipName }},
+      { new: true } // return the updated document
+    );
+
+    if (!updatedUser) {
+      return res.status(404).send("User not found.");
+    }
+
+    res.json({ message: "Scholarship added successfully.", updatedUser });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("An error occurred while adding the scholarship.");
+  }
+});
+
+router.get('/scholarships/:email', async (req, res) => {
+  const { email } = req.params;
+
+  if (!email) {
+    return res.status(400).send("Missing email.");
+  }
+
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).send("User not found.");
+    }
+    res.json(user.scholarships);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("An error occurred while fetching the scholarships.");
+  }
+});
+
 module.exports = router;

@@ -3,6 +3,9 @@ import { useSwipeable } from 'react-swipeable';
 import { useLocation } from "react-router-dom";
 import '../style/SwipeInterface.css';
 import scholarshipsData from '../data/scholarships.json';
+import axios from 'axios';
+
+const email = localStorage.getItem('email');
 
 // Function to import all images from a given context
 function importAll(r) {
@@ -119,6 +122,23 @@ const SwipeInterface = () => {
     }, 500);
   };
 
+  const handleLoveClick = (scholarshipName) => {
+    console.log(email)
+    console.log(scholarshipName)
+    axios.post('http://localhost:5050/api/add-scholarship', {
+      email: email,
+      scholarshipName: scholarshipName,
+    })
+    .then(response => {
+      console.log(response.data.message);
+      // Optionally update the UI to reflect the change
+    })
+    .catch(error => {
+      console.error("Error adding scholarship:", error.response.data);
+    });
+    moveCard('right');
+  };
+
   return (
     <div className="tinder">
       <div id="stack" className="tinder--cards">
@@ -138,10 +158,10 @@ const SwipeInterface = () => {
 
 
       <div className="tinder--buttons">
-        <button id="nope" className="button nope" onClick={() => moveCard('left')} disabled={currentIndex >= pods.length - 1}>
+        <button id="nope" className="button nope" onClick={() => moveCard('left') } disabled={currentIndex >= pods.length - 1}>
           Nope
         </button>
-        <button id="love" className="button love" onClick={() => moveCard('right')} disabled={currentIndex >= pods.length - 1}>
+        <button id="love" className="button love" onClick={() => handleLoveClick(pods[currentIndex].name)} disabled={currentIndex >= pods.length - 1}>
           Love
         </button>
       </div>
