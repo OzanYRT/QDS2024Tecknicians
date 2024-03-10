@@ -33,7 +33,7 @@ export default function Navbar() {
           <ul className="navbar-nav ml-auto">
             <li className="nav-item">
               <NavLink className="nav-link" to="/page1">
-                <FontAwesomeIcon icon={faGraduationCap} /><br/>My Scholarships
+                <FontAwesomeIcon icon={faUser}/><br/>Profile
               </NavLink>
             </li>
             <li className="nav-item">
@@ -42,13 +42,8 @@ export default function Navbar() {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/profile">
-                <FontAwesomeIcon icon={faUser} /><br/>Profile
-              </NavLink>
-            </li>
-            <li className="nav-item">
               <NavLink className="nav-link" to="/attending">
-               <FontAwesomeIcon icon={faHeart} /><br/>Attending
+               <FontAwesomeIcon icon={faGraduationCap}  /><br/>My Scholarships
              </NavLink>
             </li>
 
