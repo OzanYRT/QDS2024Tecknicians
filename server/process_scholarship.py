@@ -1,36 +1,48 @@
 import json
-import subprocess
-from generate_application import send_prompt
+from WebScraping_AutoFill.main import scrape_scholarships
+from generate_application import generate_application
 
-# Path to the web scraping script
-web_scraper_script = '../WebScraping_autofill/main.py'
+first_scholarship = scrape_scholarships()
 
-# Run the web scraper to update scholarship data
-subprocess.run(['python', web_scraper_script], check=True)
-
-# Read the updated scholarship data
-with open('../WebScraping/scholarships_data.json', 'r') as f:
-    scholarships_data = json.load(f)
-
-# Extract the first scholarship from the scraped data
-first_scholarship = scholarships_data[0] if scholarships_data else None
-
-# Assuming the user_info_json is already defined in your generate_application.py
 user_info_json = json.dumps({
-  # ... your hardcoded user_info data ...
+    "name": "Harry",
+    "address": "1234 Privet Drive",
+    "phone": "123-456-7890",
+    "email": "harry@example.com",
+    "educational_background": {
+        "current_school": "Hogwarts School of Witchcraft and Wizardry",
+        "GPA": "3.8",
+        "transcripts": "Attached",
+        "enrollment_status": "Full-time"
+    },
+    "extracurricular_activities": [
+        "Quidditch team captain",
+        "Dumbledore's Army founder"
+    ],
+    "honors_and_awards": [
+        "Triwizard Tournament Champion",
+        "Order of Merlin, First Class"
+    ],
+    "future_plans": {
+        "study_plans": "To become an Auror",
+        "career_goals": "Defeat dark wizards",
+        "intended_major": "Defense Against the Dark Arts",
+        "intended_university": "Hogwarts"
+    },
+    "proof_of_eligibility": "British citizen, resident of England",
+    "other_details": {
+        "heritage": "Half-blood",
+        "courseload": "Heavy with a focus on magical defense"
+    }
 })
 
 if first_scholarship:
-    # Convert scholarship data to JSON string
-    scholarship_data_json = json.dumps(first_scholarship)
-
-    # Generate the application essay
-    essay = send_prompt(scholarship_data_json, user_info_json)
-
-    # Output the essay to a text file
-    with open('scholarship_essay.txt', 'w') as f:
-        f.write(essay)
-
-    print("The scholarship essay has been generated and saved to 'scholarship_essay.txt'.")
+    try:
+        scholarship_data_json = json.dumps(first_scholarship) if first_scholarship else '{}'
+        generate_application(scholarship_data_json, user_info_json)
+        print("The scholarship essay has been generated and saved to 'scholarship_essay.txt'.")
+    except Exception as e:
+        print(f"An error occurred: {str(e)}")
 else:
     print("No scholarship data found.")
+
