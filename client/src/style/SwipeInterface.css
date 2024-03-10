@@ -2,23 +2,27 @@
 html, body {
   height: 100%;
   margin: 0;
-}
-
-body {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* This will vertically center everything in the body */
+  flex-direction: column; /* Aligns children (like .tinder) in a column */
   background: linear-gradient(to bottom, #FF8737, #FF9B64);
 }
 
-
-
-
-
 .tinder {
+  width: 90vw; /* Adjusted to ensure it does not stretch too wide */
+  max-width: 400px; /* Keeps the maximum width */
   height: 75vh;
+  margin-left: 150px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   transition: opacity 0.1s ease-in-out;
+  opacity: 1; /* You might adjust this based on your loading logic */
 }
+
+/* Other styles remain the same */
+
 
 .loaded.tinder {
   opacity: 1;
@@ -155,6 +159,7 @@ body {
 
 .nope {
   background-color: #ff5858;
+  
 }
 
 .love {
@@ -183,5 +188,7 @@ body {
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
+    margin-left: 140px;
+
   }
 }

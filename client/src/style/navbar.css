@@ -1,61 +1,85 @@
-/* Ensuring navbar links are stacked vertically on larger screens */
+/* General styles for the navbar, applicable to all screen sizes */
+.navbar {
+  background-color: white; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+  overflow: hidden !important;
+}
+
+/* Styles for larger screens */
 @media (min-width: 992px) {
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 250px; 
-      display: flex;
-      flex-direction: column;
-      align-items: start;
-      padding-top: 20px;
-    }
-    
-    .login-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
 
-    
-    /* Override Bootstrap's flex direction for navbar-nav */
-    .navbar-nav {
-      display: flex;
-      flex-direction: column !important; 
-      width: 100%;
-    }
-    
-    .nav-item {
-      text-align: left;
-    }
-  
-    .nav-link {
-      padding-left: 20px; 
-    }
-    
-    .navbar-collapse {
-      display: flex !important;
-      flex-direction: column !important;
-      align-items: start; 
-    }
+   
+  .navbar-brand {
+    align-items: center !important;
+    display: flex;
+    flex-direction: column; 
+    margin-left: 25px;
+  }
+
+
+  .navbar {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 250px; 
+    height: 100vh; 
+    display: flex;
+    flex-direction: column; 
+    align-items: center; /* Center align items */
+    padding: 20px; 
+    overflow-y: auto;
+  }
+ 
+
+
+  .navbar-nav {
+    flex-direction: column !important; 
+    width: 100%; 
+    align-items: center;
   }
   
-  /* Adjustments for mobile view to ensure the hamburger menu works correctly */
-  @media (max-width: 991px) {
-    .navbar {
-      width: 100%;
-      height: auto;
-    }
-  
-    /* This ensures navbar-nav items are displayed inline in a row for mobile view */
-    .navbar-nav {
-      flex-direction: row !important;
-      justify-content: flex-end;
-    }
+  .nav-link {
+    width: 100%; /* Full width for alignment */
+    padding: 10px 20px; 
+    display: flex;
+    flex-direction: column; /* Stack icon and text */
+    align-items: center; /* Center align items */
+    color: black; 
+    text-decoration: none;
+    margin-bottom: 10px; /* Space between nav items */
   }
-  
 
+  .nav-item:not(:last-child) {
+    margin-bottom: 10px;
+  }
+}
 
-  
+/* Styles for mobile and smaller screens */
+@media (max-width: 991px) {
+  .navbar {
+    width: 100%; 
+    height: auto;
+  }
+
+  .navbar-nav {
+    flex-direction: row; 
+    justify-content: center; /* Center align nav items */
+  }
+
+  .nav-link {
+    padding: 8px 12px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0; /* Reset margin bottom for mobile */
+  }
+
+  .nav-link svg {
+    margin-bottom: 0.5rem; /* Space between icon and text */
+  }
+
+  .navbar-toggler {
+    /* Custom styles for the toggler */
+  }
+}
