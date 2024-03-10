@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function RecordList() {
+  const navigate = useNavigate();
   const [prompt, setPrompt] = useState("");
   const [response, setResponse] = useState("");
 
@@ -10,17 +12,18 @@ export default function RecordList() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
+    e.preventDefault();
     try {
-      // Replace `your_endpoint_url` with your actual endpoint URL
-      // and ensure your server is set up to handle the query parameter correctly
       const result = await axios.get(`http://localhost:5171/api/Scholarship?question=${encodeURIComponent(prompt)}`);
-      setResponse(result.data);
+      const names = result.data.match(/\*\*(.*?)\*\*/g).map(name => name.replace(/\*\*/g, ''));
+      console.log(names);
+      navigate('/home', { state: { scholarships: names } });
     } catch (error) {
       console.error("There was an error fetching the response:", error);
       setResponse("Error fetching response.");
     }
   };
+  
 
   return (
     <div>
