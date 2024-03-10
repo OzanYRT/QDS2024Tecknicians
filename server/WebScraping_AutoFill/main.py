@@ -19,7 +19,7 @@ def scrape_scholarships():
     category_links = get_category_links(main_url)
     for category_link in category_links:
         scholarship_links = get_scholarship_links(category_link)
-        # IF WANT MORE DATA DELETE BELOW 5 LINE AND UNCOMMENT OTHER CODE
+        # IF WANT MORE DATA DELETE BELOW 5 LINE AND UNCOMMENT OTHER CODEs
         for i, scholarship_link in enumerate(scholarship_links):
             if i == 2:  # stop after processing 10 links
                 break
