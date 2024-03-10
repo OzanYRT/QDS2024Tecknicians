@@ -1,6 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const User = require('../models/User');
+const path = require('path');
 
 const router = express.Router();
 
@@ -100,6 +101,21 @@ router.put('/update/:email', async (req, res) => {
     console.error('Error updating user data:', error);
     res.status(500).json({ message: 'Error updating user data' });
   }
+});
+
+// Endpoint to download a generated PDF
+router.get('/download_essay', (req, res) => {
+  // Define the path to the PDF file
+  const pdfPath = path.join(__dirname, '../scholarship_essay.pdf');
+
+  // Set the headers to indicate that the browser should download the file
+  res.download(pdfPath, 'scholarship_essay.pdf', (err) => {
+    if (err) {
+      // Handle error, but don't expose to the client
+      console.error(err);
+      res.status(500).send("Error downloading the file.");
+    }
+  });
 });
 
 module.exports = router;
