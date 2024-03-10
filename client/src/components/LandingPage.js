@@ -1,13 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "../style/LandingPage.css"; 
+import newLogo from '../assets/images/glow_6.png'; 
 
 const LandingPage = () => {
   return (
-    <div style={{ textAlign: 'center', marginTop: '50px' }}>
-      <h1>Welcome to Our App</h1>
-      <p>Select an option below:</p>
-      <Link to="/login"><button>Login</button></Link>
-      <Link to="/register"><button>Register</button></Link>
+    <div className="landing-page">
+      <div className="icon">
+        <img src={newLogo} alt="logo" className="logo" />
+      </div>
+      <div className="d-grid gap-2 col-6 mx-auto">
+        <Link to="/login" className="btn btn-primary btn-custom">Login</Link>
+        <Link to="/register" className="btn btn-secondary btn-custom">Register</Link>
+      </div>
     </div>
   );
 };

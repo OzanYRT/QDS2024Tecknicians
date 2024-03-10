@@ -5,6 +5,7 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
+    margin-right: 250px;
     /*background: linear-gradient(to bottom, #FF8737, #f6a273);*/
     /*background: linear-gradient(to bottom, #0c4569, #FF9B64);*/
     /*background: linear-gradient(to bottom, #FF9B64, #FFFFFF);*/
@@ -13,8 +14,11 @@
   
   .icon {
     display: flex;
-    justify-content: center; /* Center the logo horizontally */ /* Ensure the div takes up the full width of its container */
-    margin-bottom: 50px; /* Adjust space between the logo and the form */
+    justify-content: center; 
+    margin-top: -90px;
+    margin-bottom: 20px; 
+    height: 20vh;
+    width: 32vh;
   }
 
   

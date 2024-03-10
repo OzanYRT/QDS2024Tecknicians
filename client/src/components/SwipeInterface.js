@@ -3,6 +3,9 @@ import { useSwipeable } from 'react-swipeable';
 import { useLocation } from "react-router-dom";
 import '../style/SwipeInterface.css';
 import scholarshipsData from '../data/scholarships.json';
+import axios from 'axios';
+
+const email = localStorage.getItem('email');
 
 // Function to import all images from a given context
 function importAll(r) {
@@ -214,29 +217,46 @@ const SwipeInterface = () => {
     }
   }, [displayCard, currentIndex]);
 
-  return (
-      <div className="tinder">
-        <div id="stack" className="tinder--cards">
-          {pods.length > 0 && currentIndex < pods.length ? (
-            <div className={`tinder--card ${isMouseDown ? 'moving' : ''}`} {...handlers} style={cardStyle}>
-              <img className="card-image" src={getRandomImage()} alt="Card top" />
-              <div className="card-content">
-                <h3>{pods[currentIndex].name}</h3>
-                <h4>{pods[currentIndex].amount}</h4>
-                <p>Deadline: {pods[currentIndex].deadline}</p>
-              </div>
-            </div>
-          ) : (
-            <div className="empty-message">No more scholarships.</div>
-          )}
-        </div>
-        <div className="tinder--buttons">
-          <button id="nope" className="button nope" onClick={() => moveCard('left')} disabled={currentIndex >= pods.length - 1}>Nope</button>
-          <button id="love" className="button love" onClick={() => moveCard('right')} disabled={currentIndex >= pods.length - 1}>Love</button>
-        </div>
-      </div>
-    );
+  const handleLoveClick = (scholarshipName) => {
+    console.log(email)
+    console.log(scholarshipName)
+    axios.post('http://localhost:5050/api/add-scholarship', {
+      email: email,
+      scholarshipName: scholarshipName,
+    })
+    .then(response => {
+      console.log(response.data.message);
+      // Optionally update the UI to reflect the change
+    })
+    .catch(error => {
+      console.error("Error adding scholarship:", error.response.data);
+    });
+    moveCard('right');
   };
+
+  return (
+    <div className="tinder">
+      <div id="stack" className="tinder--cards">
+        {pods.length > 0 && currentIndex < pods.length ? (
+          <div className={`tinder--card ${isMouseDown ? 'moving' : ''}`} {...handlers} style={cardStyle}>
+            <img className="card-image" src={getRandomImage()} alt="Card top" />
+            <div className="card-content">
+              <h3>{pods[currentIndex].name}</h3>
+              <h4>{pods[currentIndex].amount}</h4>
+              <p>Deadline: {pods[currentIndex].deadline}</p>
+            </div>
+          </div>
+        ) : (
+          <div className="empty-message">No more scholarships.</div>
+        )}
+      </div>
+      <div className="tinder--buttons">
+        <button id="nope" className="button nope" onClick={() => moveCard('left')} disabled={currentIndex >= pods.length - 1}>Nope</button>
+        <button id="love" className="button love" onClick={() => handleLoveClick(pods[currentIndex].name)} disabled={currentIndex >= pods.length - 1}>Love</button>
+      </div>
+    </div>
+  );
+};
 
 
 export default SwipeInterface;

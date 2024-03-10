@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 import { useAuth } from './AuthContext';
 import newLogo from '../assets/images/logo.webp';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGraduationCap, faRobot, faCog, faUser, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faGraduationCap, faRobot, faCog, faUser, faHeart, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -33,7 +33,7 @@ export default function Navbar() {
           <ul className="navbar-nav ml-auto">
             <li className="nav-item">
               <NavLink className="nav-link" to="/page1">
-                <FontAwesomeIcon icon={faGraduationCap} /><br/>My Scholarships
+                <FontAwesomeIcon icon={faUser}/><br/>Profile
               </NavLink>
             </li>
             <li className="nav-item">
@@ -42,15 +42,11 @@ export default function Navbar() {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/settings">
-                <FontAwesomeIcon icon={faCog} /><br/>Settings
-              </NavLink>
+              <NavLink className="nav-link" to="/attending">
+               <FontAwesomeIcon icon={faGraduationCap}  /><br/>My Scholarships
+             </NavLink>
             </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/profile">
-                <FontAwesomeIcon icon={faUser} /><br/>Profile
-              </NavLink>
-            </li>
+
             <li className="nav-item">
               <NavLink className="nav-link" to="/logout">
                 <FontAwesomeIcon icon={faSignOutAlt} /><br/>Log Out

@@ -1,5 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import "../style/page1.css"; 
+
+
+const hashCode = str => {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    const character = str.charCodeAt(i);
+    hash = ((hash << 5) - hash) + character;
+    hash |= 0; // Convert to 32bit integer
+  }
+  return hash;
+};
+
+const stringToColor = str => {
+  const hash = hashCode(str);
+  const hue = hash % 360; // Get a hue value between 0 and 359
+  return `hsl(${hue}, 50%, 60%)`; // Return HSL color string with 60% saturation and 80% lightness for a pastel look
+};
+
+
 
 export default function Page1() {
   const [user, setUser] = useState(null); // Holds the fetched user data
@@ -31,17 +51,32 @@ export default function Page1() {
   return (
     <div>
       {error ? (
-        <p>{error}</p>
+        <p className="message">{error}</p>
       ) : user ? (
-        <div>
+        <div className="user-details-card">
           <h1>Welcome, {user.username}</h1>
           <p>Email: {user.email}</p>
-          <p>Interests: {user.interests?.join(', ')}</p>
-          <p>About Me: {user.aboutme || 'No additional information provided.'}</p>
+          <div className="interests-container">
+            {user.interests?.map((interest, index) => (
+              <span 
+                key={index} 
+                className="interest-tag"
+                style={{
+                  backgroundColor: stringToColor(interest),
+                  color: 'white', 
+                  border: '1px solid black'
+                }}
+              >
+                {interest}
+              </span>
+            ))}
+          </div>
+          <p>About Me: 
+            <br></br>
+            {user.aboutme || 'No additional information provided.'}</p>
         </div>
       ) : (
-        <p>Loading user data...</p>
+        <p className="message">Loading user data...</p>
       )}
     </div>
-  );
-}
+  )};
