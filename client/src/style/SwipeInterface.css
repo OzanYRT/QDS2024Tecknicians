@@ -10,6 +10,7 @@ html, body {
 }
 
 .tinder {
+  margin-top: -45px;
   width: 90vw; /* Adjusted to ensure it does not stretch too wide */
   max-width: 400px; /* Keeps the maximum width */
   height: 75vh;
@@ -149,6 +150,7 @@ html, body {
 
 .tinder--buttons {
   position: absolute;
+  margin-bottom: 10px;
   bottom: 5%;
   left: 50%;
   transform: translateX(-50%);
@@ -172,12 +174,12 @@ html, body {
 }
 
 .nope {
-  background-color: #ff5858;
+  background-color: #ff5858 !important;
   
 }
 
 .love {
-  background-color: #4ccc64;
+  background-color: #4ccc64 !important;
 }
 
 @media (min-width: 992px) {
