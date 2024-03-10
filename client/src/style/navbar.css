@@ -5,17 +5,25 @@
       top: 0;
       left: 0;
       height: 100%;
-      width: 250px; /* Adjust based on your preference */
+      width: 250px; 
       display: flex;
       flex-direction: column;
       align-items: start;
       padding-top: 20px;
     }
     
+    .login-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    
     /* Override Bootstrap's flex direction for navbar-nav */
     .navbar-nav {
       display: flex;
-      flex-direction: column !important; /* Force items to stack vertically */
+      flex-direction: column !important; 
       width: 100%;
     }
     
@@ -24,13 +32,13 @@
     }
   
     .nav-link {
-      padding-left: 20px; /* Adjust padding to align links */
+      padding-left: 20px; 
     }
     
     .navbar-collapse {
       display: flex !important;
-      flex-direction: column !important; /* Ensure that navbar-collapse also follows the column direction */
-      align-items: start; /* Align items to the start */
+      flex-direction: column !important;
+      align-items: start; 
     }
   }
   
@@ -47,4 +55,7 @@
       justify-content: flex-end;
     }
   }
+  
+
+
   

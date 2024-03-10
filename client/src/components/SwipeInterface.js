@@ -1,21 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { useSwipeable } from 'react-swipeable';
-import { Link } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 import '../style/SwipeInterface.css';
 import scholarshipsData from '../data/scholarships.json';
 
 const SwipeInterface = () => {
   const [pods, setPods] = useState([]);
+  const location = useLocation();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [cardStyle, setCardStyle] = useState({});
+  const [isMouseDown, setIsMouseDown] = useState(false); 
 
   useEffect(() => {
-    setPods(scholarshipsData);
-  }, []);
+    if (location.state && location.state.scholarships) {
+      // Assuming scholarship names are unique identifiers
+      console.log("Names from response:", location.state.scholarships);
+      console.log("Names in scholarshipsData:", scholarshipsData.map(s => s.name));
+
+      const filteredPods = scholarshipsData.filter(scholarship => 
+        location.state.scholarships.map(name => name.toLowerCase()).includes(scholarship.name.toLowerCase())
+      );      
+      console.log("Filtered Pods:", filteredPods.map(fp => fp.name));
+      setPods(filteredPods);
+    } else {
+      // Fallback to showing all scholarships or handle this scenario as needed
+      setPods(scholarshipsData);
+    }
+  }, [location.state]);
 
   const swipingHandler = (eventData) => {
     const { deltaX, deltaY } = eventData;
-    const rotation = (deltaX / 100) * 10; 
+    const rotation = (deltaX / 100) * 10;
     setCardStyle({
       transform: `translate(${deltaX}px, ${deltaY}px) rotate(${rotation}deg)`,
       transition: 'transform 0.1s ease-out',
@@ -24,21 +39,19 @@ const SwipeInterface = () => {
   
   const swipeEndHandler = (eventData) => {
     const { absX, dir } = eventData;
-    if (absX > 100) { // Swipe threshold
+    if (absX > 100) {
       if (dir === 'Left') {
-        // Simulate 'Nope' action
         console.log("Swiped No on:", pods[currentIndex].name);
         moveCard('left');
       } else if (dir === 'Right') {
-        // Simulate 'Love' action
         console.log("Swiped Yes on:", pods[currentIndex].name);
         moveCard('right');
       }
-      setCurrentIndex(currentIndex + 1); // Move to the next card
-      setCardStyle({}); // Reset style
+      setCurrentIndex(currentIndex + 1);
+      setCardStyle({});
     } else {
       setCardStyle({
-        transform: 'translate(0px, 0px) rotate(0deg)', // Reset position
+        transform: 'translate(0px, 0px) rotate(0deg)',
         transition: 'transform 0.5s ease-out',
       });
     }
@@ -47,49 +60,69 @@ const SwipeInterface = () => {
   const handlers = useSwipeable({
     onSwiping: swipingHandler,
     onSwiped: swipeEndHandler,
+    onMouseDown: () => setIsMouseDown(true),
+    onMouseUp: () => setIsMouseDown(false),
   });
 
-  // Function to move to the next card and simulate swipe action
-  const moveCard = (direction) => {
-    console.log(`Swiped ${direction} on:`, pods[currentIndex].name);
+  const handleSwipe = (pod, action) => {
+    fetch(`/api/${action}Pod`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ pod }),
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
+  };
 
-    // Check if there's a next card to show
-    if (currentIndex < pods.length - 1) {
-      setCurrentIndex(currentIndex + 1);
-    } else {
-      console.log("Reached the end of the stack!");
-    }
+  const moveCard = (direction) => {
+    const moveOutWidth = document.body.clientWidth * (direction === 'left' ? -1.5 : 1.5);
+    const rotateDeg = direction === 'left' ? -60 : 60;
+  
+    setCardStyle({
+      transform: `translate(${moveOutWidth}px, -100px) rotate(${rotateDeg}deg)`,
+      transition: 'transform 0.5s ease-out',
+    });
+  
+    setTimeout(() => {
+      const action = direction === 'left' ? 'nope' : 'save';
+      const currentPod = pods[currentIndex];
+  
+      if (currentPod) {
+        handleSwipe(currentPod, action);
+      }
+  
+      if (currentIndex < pods.length - 1) {
+        setCurrentIndex(currentIndex + 1);
+      } else {
+        console.log("Reached the end of the stack!");
+      }
+  
+      setCardStyle({});
+    }, 500);
   };
 
   return (
     <div className="tinder">
       <div id="stack" className="tinder--cards">
         {pods.length > 0 && currentIndex < pods.length ? (
-          <div className="tinder--card" {...handlers} style={cardStyle}>
+          <div className={`tinder--card ${isMouseDown ? 'moving' : ''}`} {...handlers} style={cardStyle}>
             <h3>{pods[currentIndex].name}</h3>
             <p>{pods[currentIndex].amount}</p>
             <p>Deadline: {pods[currentIndex].deadline}</p>
           </div>
         ) : (
-          <div>No more scholarships.</div>
+          <div className="empty-message">No more scholarships.</div>
         )}
       </div>
 
       <div className="tinder--buttons">
-        <button
-          id="nope"
-          className="button nope"
-          onClick={() => moveCard('left')}
-          disabled={currentIndex >= pods.length - 1}
-        >
+        <button id="nope" className="button nope" onClick={() => moveCard('left')} disabled={currentIndex >= pods.length - 1}>
           Nope
         </button>
-        <button
-          id="love"
-          className="button love"
-          onClick={() => moveCard('right')}
-          disabled={currentIndex >= pods.length - 1}
-        >
+        <button id="love" className="button love" onClick={() => moveCard('right')} disabled={currentIndex >= pods.length - 1}>
           Love
         </button>
       </div>
