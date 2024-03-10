@@ -43,24 +43,19 @@ html, body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background: #FFFFFF;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.75);
+  cursor: grab;
   width: 90vw;
   max-width: 400px;
   height: 75vh;
-  background: #FFFFFF;
-  border-radius: 20px; 
-  overflow: hidden;
-  position: relative;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.75);
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  cursor: grab;
-  display: flex;
-  flex-direction: column;
-  justify-content: center; 
-  align-items: center;
-  top: 0; /* Align cards to the top */
-  left: 50%; /* Center cards horizontally */
-  transform: translate(-50%, 0) scale(1); /* Center the first card */
+  position: absolute; /* Important for stacking */
+  left: 50%;
+  /* Use JavaScript to dynamically adjust 'transform' based on the card's position in the stack */
   transform-origin: bottom center;
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out; /* Adjusted for consistency */
 }
 
 .card-image {
@@ -74,7 +69,7 @@ html, body {
 .card-image img {
   max-width: 100%;
   max-height: 100%;
-  object-fit: cover; 
+  object-fit: cover;
 }
 
 .card-content {
@@ -227,6 +222,5 @@ html, body {
     left: 50%;
     transform: translateX(-50%);
     margin-left: 140px;
-
   }
 }
