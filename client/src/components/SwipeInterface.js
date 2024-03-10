@@ -123,20 +123,14 @@ const SwipeInterface = () => {
     <div className="tinder">
       <div id="stack" className="tinder--cards">
         {pods.length > 0 && currentIndex < pods.length ? (
-          pods.map((pod, index) => (
-            <div
-              key={pod.id}
-              className={`tinder--card ${index === currentIndex ? 'top' : ''} ${isMouseDown ? 'moving' : ''}`}
-              {...handlers}
-              style={{ ...cardStyle, zIndex: pods.length - index }}
-            >
-              <img src={getRandomImage()} alt="Card" className="card-image" />
-              <h3>{pod.name}</h3>
-              <p>{pod.amount}</p>
-              <p>Deadline: {pod.deadline}</p>
-              {/* Other content */}
+          <div className={`tinder--card ${isMouseDown ? 'moving' : ''}`} {...handlers} style={cardStyle}>
+            <img className="card-image" src={getRandomImage()} alt="Card top" />
+            <div className="card-content">
+              <h3>{pods[currentIndex].name}</h3>
+              <h4>{pods[currentIndex].amount}</h4>
+              <p>Deadline: {pods[currentIndex].deadline}</p>
             </div>
-          ))
+          </div>
         ) : (
           <div className="empty-message">No more scholarships.</div>
         )}
