@@ -13,12 +13,12 @@ const hashCode = str => {
   return hash;
 };
 
-// Function to generate a color from a string
 const stringToColor = str => {
   const hash = hashCode(str);
   const hue = hash % 360; // Get a hue value between 0 and 359
-  return `hsl(${hue}, 70%, 60%)`; // Return HSL color string
+  return `hsl(${hue}, 50%, 60%)`; // Return HSL color string with 60% saturation and 80% lightness for a pastel look
 };
+
 
 
 export default function Page1() {
@@ -55,25 +55,28 @@ export default function Page1() {
       ) : user ? (
         <div className="user-details-card">
           <h1>Welcome, {user.username}</h1>
-          <p>Email</p>
-          {user.email}
-          <p>Interests     <div className="interests-container">
-      {user?.interests?.map((interest, index) => (
-        <span 
-          key={index} 
-          className="interest-tag"
-          style={{ backgroundColor: stringToColor(interest) }}
-        >
-          {interest}
-        </span>
-      ))}
-    </div></p>
-          <p>About Me</p>
-          {user.aboutme || 'No additional information provided.'}
+          <p>Email: {user.email}</p>
+          <div className="interests-container">
+            {user.interests?.map((interest, index) => (
+              <span 
+                key={index} 
+                className="interest-tag"
+                style={{
+                  backgroundColor: stringToColor(interest),
+                  color: 'white', 
+                  border: '1px solid black'
+                }}
+              >
+                {interest}
+              </span>
+            ))}
+          </div>
+          <p>About Me: 
+            <br></br>
+            {user.aboutme || 'No additional information provided.'}</p>
         </div>
       ) : (
         <p className="message">Loading user data...</p>
       )}
     </div>
-  );
-}
+  )};
