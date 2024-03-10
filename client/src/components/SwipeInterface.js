@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import '../style/SwipeInterface.css';
 import scholarshipsData from '../data/scholarships.json';
 import axios from 'axios';
+import Modal from './Modal';
 
 const email = localStorage.getItem('email');
 
@@ -26,7 +27,8 @@ const SwipeInterface = () => {
   });
   const [isMouseDown, setIsMouseDown] = useState(false);
   const [displayCard, setDisplayCard] = useState(true);
-
+  const [showModal, setShowModal] = useState(false);
+  const [currentCardDetails, setCurrentCardDetails] = useState({});
 
   // Function to get a random image for a card
   const getRandomImage = () => {
@@ -199,18 +201,33 @@ const SwipeInterface = () => {
     moveCard('right');
   };
 
+  const handleCardClick = (pod) => {
+    setCurrentCardDetails(pod);
+    setShowModal(true);
+  };
+
+  
   return (
     <div className="tinder">
+      <Modal showModal={showModal} setShowModal={setShowModal} cardDetails={currentCardDetails} />
       <div id="stack" className="tinder--cards">
         {pods.length > 0 && currentIndex < pods.length ? (
-          <div className={`tinder--card ${isMouseDown ? 'moving' : ''}`} {...handlers} style={cardStyle}>
-            <img className="card-image" src={getRandomImage()} alt="Card top" />
-            <div className="card-content">
-              <h3>{pods[currentIndex].name}</h3>
-              <h4>{pods[currentIndex].amount}</h4>
-              <p>Deadline: {pods[currentIndex].deadline}</p>
+          pods.map((pod, index) => (
+            <div 
+              key={index} 
+              className={`tinder--card ${index === currentIndex ? (isMouseDown ? 'moving' : '') : 'hidden'}`} 
+              {...handlers} 
+              style={cardStyle}
+              onClick={() => handleCardClick(pod)}
+            >
+              <img className="card-image" src={getRandomImage()} alt="Card" />
+              <div className="card-content">
+                <h3>{pod.name}</h3>
+                <h4>{pod.amount}</h4>
+                <p>Deadline: {pod.deadline}</p>
+              </div>
             </div>
-          </div>
+          ))
         ) : (
           <div className="empty-message">No more scholarships.</div>
         )}
