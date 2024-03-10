@@ -19,7 +19,11 @@ const SwipeInterface = () => {
   const [pods, setPods] = useState([]);
   const location = useLocation();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [cardStyle, setCardStyle] = useState({});
+  const [cardStyle, setCardStyle] = useState({
+    transform: 'translateX(0%) translateY(0px) rotate(0deg) scale(1)',
+    opacity: 1,
+    transition: 'transform 0.5s ease-out, opacity 0.5s ease-out'
+  });
   const [isMouseDown, setIsMouseDown] = useState(false);
   const [displayCard, setDisplayCard] = useState(true);
 
@@ -111,45 +115,6 @@ const SwipeInterface = () => {
     .catch(error => console.error('Error:', error));
   };
 
-  // const moveCard = (direction) => {
-  //   // Adjust the starting transform based on the swipe direction
-  //   const moveOutWidth = document.body.clientWidth * (direction === 'left' ? -1.5 : 1.5);
-  //   const rotateDeg = direction === 'left' ? -20 : 20; // Apply a slight rotation for effect
-  //
-  //   // Apply the swipe out effect with adjusted opacity and transform
-  //   setCardStyle({
-  //     transform: `translateX(${moveOutWidth}px) rotate(${rotateDeg}deg)`,
-  //     opacity: 0,
-  //     transition: 'transform 0.5s ease-out, opacity 0.5s ease-out',
-  //   });
-  //
-  //   setTimeout(() => {
-  //     // After the swipe out transition, prepare the next card
-  //     const nextIndex = (currentIndex + 1) % pods.length; // Loop or go to next card
-  //     setCurrentIndex(nextIndex);
-  //     setDisplayCard(false); // Hide the card to prevent it from sliding back
-  //
-  //     // Reset the card style without making it immediately visible
-  //     setTimeout(() => {
-  //       setCardStyle({
-  //         transform: 'translateX(0px) rotate(0deg)', // Reset to center without visible transition
-  //         opacity: 0, // Keep it invisible
-  //         transition: 'none', // No transition for this reset
-  //       });
-  //
-  //       // Delay the visibility of the new card slightly to ensure it doesn't "slide" into view
-  //       setTimeout(() => {
-  //         setCardStyle(currentStyle => ({
-  //           ...currentStyle,
-  //           opacity: 1,
-  //           transition: 'opacity 0.5s ease-in', // Only fade in the card
-  //         }));
-  //         setDisplayCard(true); // Now, make the card visible
-  //       }, 100); // Short delay to finalize positioning before fading in
-  //     }, 1); // Minimal delay to separate state updates
-  //
-  //   }, 500); // Ensure this timeout matches the CSS transition time
-  // };
 
   const moveCard = (direction) => {
   // Adjust the starting transform based on the swipe direction
@@ -182,7 +147,7 @@ const SwipeInterface = () => {
         const scale = 1 - index * 0.05;
         const translateY = -20 * index;
         card.style.zIndex = `${zIndex}`;
-        card.style.transform = `translateX(-50%) scale(${scale}) translateY(${translateY}px)`;
+        card.style.transform = `translateX(0%) scale(${scale}) translateY(${translateY}px)`;
         card.style.opacity = index === 0 ? '1' : '0.7'; // Fade in only the top card
       });
 
@@ -190,7 +155,7 @@ const SwipeInterface = () => {
       setTimeout(() => {
         setCardStyle({
           opacity: 1,
-          transform: 'translateX(-50%) translateY(0px) rotate(0deg) scale(1)',
+          transform: 'translateX(0%) translateY(0px) rotate(0deg) scale(1)',
           transition: 'opacity 0.5s ease-in',
         });
         setDisplayCard(true); // Make the new top card visible
