@@ -3,14 +3,19 @@ import "bootstrap/dist/css/bootstrap.css";
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import "../style/navbar.css"; 
 import { NavLink } from "react-router-dom";
+import { useAuth } from './AuthContext';
+import newLogo from '../assets/images/logo.webp'; // Adjust the path based on your project structure
+
 
 export default function Navbar() {
+  const { isLoggedIn } = useAuth(); // Destructure isLoggedIn
+  
+  if (!isLoggedIn) return null;
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <NavLink className="navbar-brand" to="/">
-          <img style={{ "width": 70 + '%' }} src="logos/ScrapArtsMusic-White.png" alt="logo"></img>
-        </NavLink>
+        <img style={{ width: '70%' }} src={newLogo} alt="logo" />        </NavLink>
         <button
           className="navbar-toggler"
           type="button"

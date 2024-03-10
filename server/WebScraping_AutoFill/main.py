@@ -1,6 +1,6 @@
 import json
-
 from server.WebScraping_AutoFill import convertjsontocsv
+from server.WebScraping_AutoFill.JulieColeAutoComplete import *
 from server.WebScraping_AutoFill.helpfunctions import *
 
 
@@ -15,8 +15,7 @@ def scrape_scholarships():
     password = "6qiwSQMaP4S5DsT"  # Your actual password
     perform_login(driver, username, password)
 
-    # Proceed with further actions or scraping
-
+    # Handles the scraping of scholarship data
     category_links = get_category_links(main_url)
     for category_link in category_links:
         scholarship_links = get_scholarship_links(category_link)
@@ -27,9 +26,10 @@ def scrape_scholarships():
             scholarship_info = scrape_scholarship_info(id, scholarship_link, driver)
             scholarships_data.append(scholarship_info)
             id += 1
-        # for scholarship_link in scholarship_links:
-        #     scholarship_info = scrape_scholarship_info(scholarship_link, driver)
-        #     scholarships_data.append(scholarship_info)
+    #     for scholarship_link in scholarship_links:
+    #         scholarship_info = scrape_scholarship_info(id, scholarship_link, driver)
+    #         scholarships_data.append(scholarship_info)
+    #         id += 1
 
     filtered_data = [item for item in scholarships_data if item is not None]
 
@@ -41,7 +41,14 @@ def scrape_scholarships():
     with open('scholarships_data.json', 'r') as f:
         first_entry = json.load(f)[0]
 
-    # ... rest of your code ...
+
+    # this is to autocomplete the application for Julie Cole Auto
+    autocompleteapplication()
+
+    driver.quit()
+
+    convertjsontocsv.load_json_data()
+    convertjsontocsv.convert_to_csv()
 
     return first_entry
 # if __name__ == '__main__':
