@@ -5,7 +5,8 @@ export default function Page2() {
   const [formData, setFormData] = useState({
     username: '',
     email: '',
-    interests: [] // Changed to an array to match your data structure
+    interests: '', // Keep as a string to simplify editing
+    aboutme: '', // Adding the aboutme field
   });
 
   const userEmail = 'bigmonke@monke.com';
@@ -15,11 +16,12 @@ export default function Page2() {
     const fetchData = async () => {
       try {
         const response = await axios.get(`http://localhost:5050/api/${encodeURIComponent(userEmail)}`);
-        const { username, email, interests } = response.data;
+        const { username, email, interests, aboutme } = response.data;
         setFormData({
           username,
           email,
-          interests: interests.join(', ') // Convert array to string for the input field
+          interests: interests.join(', '), // Convert array to string for the input field
+          aboutme, // Autofill the aboutme field
         });
       } catch (error) {
         console.error('Error fetching user data:', error);
@@ -27,29 +29,22 @@ export default function Page2() {
     };
 
     fetchData();
-  }, [userEmail]);
+  }, [userEmail]); // Fetch user data once on component mount
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    // For the interests field, we keep the data as a string for the input field
-    if(name === "interests") {
-      setFormData(prev => ({ ...prev, [name]: value }));
-    } else {
-      setFormData(prev => ({ ...prev, [name]: value }));
-    }
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Prepare the data for the PUT request
+      // Prepare the data for the PUT request, converting interests back to an array
       const updateData = {
         ...formData,
-        interests: formData.interests.split(',').map(interest => interest.trim()) // Convert the string back to an array for the database
+        interests: formData.interests.split(',').map(interest => interest.trim()), // Convert the string back to an array for the database
       };
       // Perform the PUT request to update the user
-      const response = await axios.put(`http://localhost:5050/api/update/${encodeURIComponent(userEmail)}`, updateData);
-      console.log(response.data);
+      await axios.put(`http://localhost:5050/api/update/${encodeURIComponent(userEmail)}`, updateData);
       alert('User updated successfully');
     } catch (error) {
       console.error('Error updating user data:', error);
@@ -77,7 +72,7 @@ export default function Page2() {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            disabled // Email should not be editable
+            disabled // Email remains non-editable
           />
         </div>
         <div>
@@ -89,6 +84,16 @@ export default function Page2() {
             onChange={handleChange}
           />
           <small>Separate interests with commas</small>
+        </div>
+        <div>
+          <label>About Me:</label>
+          <textarea // Use textarea for aboutme to allow multi-line input
+            name="aboutme"
+            value={formData.aboutme}
+            onChange={handleChange}
+            rows="4"
+            style={{ width: '100%' }}
+          ></textarea>
         </div>
         <button type="submit">Update User</button>
       </form>

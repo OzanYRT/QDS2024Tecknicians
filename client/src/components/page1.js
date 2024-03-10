@@ -3,24 +3,22 @@ import axios from 'axios';
 
 export default function Page1() {
   // State to hold user data
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null); // Changed to null for initial loading check
 
   // Effect hook to fetch user data on component mount
   useEffect(() => {
-    // Update the URL in axios.get call to match your API endpoint structure
-    // Here, it is assumed your endpoint URL might look something like this
     const fetchData = async () => {
       try {
-        // Make sure the URL is correct and matches your server's endpoint
+        // Ensure this endpoint returns the aboutme field with the user data
         const response = await axios.get('http://localhost:5050/api/bigmonke@monke.com');
-        setUser(response.data);
+        setUser(response.data); // Update state with fetched data
       } catch (error) {
         console.error('Error fetching user data:', error);
       }
     };
 
     fetchData();
-  }, []); // Empty dependency array means this effect runs once on mount
+  }, []); // Dependency array left empty to run once on mount
 
   return (
     <div>
@@ -28,7 +26,9 @@ export default function Page1() {
         <div>
           <h1>Welcome, {user.username}</h1>
           <p>Email: {user.email}</p>
-          <p>Interests: {user.interests.join(', ')}</p>
+          <p>Interests: {user.interests?.join(', ')}</p>
+          {/* Ensure "About Me" displays even if it's empty or not present */}
+          <p>About Me: {user.aboutme || ''}</p>
         </div>
       ) : (
         <p>Loading user data...</p>
