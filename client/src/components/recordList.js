@@ -1,56 +1,40 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-const Record = (props) => (
- <tr>
-   <td>{props.record.username}</td>
-   <td>{props.record.email}</td>
-   <td>{props.record.user_type}</td>
- </tr>
-);
+import React, { useState } from "react";
+import axios from "axios";
+
 export default function RecordList() {
- const [records, setRecords] = useState([]);
-  // This method fetches the records from the database.
- useEffect(() => {
-   async function getRecords() {
-     const response = await fetch(`http://localhost:5000/record`);
-      if (!response.ok) {
-       const message = `An error occurred: ${response.statusText}`;
-       window.alert(message);
-       return;
-     }
-      const records = await response.json();
-     setRecords(records);
-   }
-    getRecords();
-    return;
- }, []);
+  const [prompt, setPrompt] = useState("");
+  const [response, setResponse] = useState("");
 
-  // This method will map out the records on the table
- function recordList() {
-   return records.map((record) => {
-     return (
-       <Record
-         record={record}
-         key={record._id}
-       />
-     );
-   });
- }
+  const handleInputChange = (e) => {
+    setPrompt(e.target.value);
+  };
 
-  // This following section will display the table with the records of individuals.
- return (
-   <div>
-     <h3>Record List</h3>
-     <table className="table table-striped" style={{ marginTop: 20 }}>
-       <thead>
-         <tr>
-           <th>Username</th>
-           <th>Email</th>
-           <th>User Type</th>
-         </tr>
-       </thead>
-       <tbody>{recordList()}</tbody>
-     </table>
-   </div>
- );
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent default form submission behavior
+    try {
+      // Replace `your_endpoint_url` with your actual endpoint URL
+      // and ensure your server is set up to handle the query parameter correctly
+      const result = await axios.get(`http://localhost:5171/api/Scholarship?question=${encodeURIComponent(prompt)}`);
+      setResponse(result.data);
+    } catch (error) {
+      console.error("There was an error fetching the response:", error);
+      setResponse("Error fetching response.");
+    }
+  };
+
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="prompt">Enter your prompt:</label>
+        <input
+          id="prompt"
+          type="text"
+          value={prompt}
+          onChange={handleInputChange}
+        />
+        <button type="submit">Submit</button>
+      </form>
+      {response && <div><p>Response:</p><p>{response}</p></div>}
+    </div>
+  );
 }
