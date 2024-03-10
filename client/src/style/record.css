@@ -41,7 +41,7 @@ html, body {
   button[type="submit"] {
     width: 100%;
     padding: 12px;
-    background-color: #f0a038;
+    background-color: #f0a038 !important;
     border: none;
     border-radius: 5px;
     color: #fff;
@@ -51,7 +51,7 @@ html, body {
   }
   
   button[type="submit"]:hover {
-    background-color: #d28119;
+    background-color: #72460c !important;
   }
   
   /* Style for error/loading messages */
