@@ -1,0 +1,14 @@
+/* ScholarshipCard.css */
+.scholarship-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 8px auto;
+  padding: 2px; /* Added padding inside the card */
+  border: 2px solid #ddd; /* Existing solid border with a light color */
+  border-radius: 8px; /* Rounded corners for a softer look */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  text-align: center;
+  background-color: #fafafa; /* Light background color for contrast */
+}

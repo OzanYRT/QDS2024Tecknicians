@@ -1,4 +1,5 @@
 import React from 'react';
+import '../style/ScholarshipCard.css'; // Make sure the path matches where you save your CSS file
 
 export default function ScholarshipCard({ scholarship }) {
   return (
