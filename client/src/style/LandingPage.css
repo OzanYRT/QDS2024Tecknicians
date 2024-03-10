@@ -1,16 +1,46 @@
-.icon {
-    display: flex;
-    justify-content: center; /* Center the logo horizontally */ /* Ensure the div takes up the full width of its container */
-    margin-bottom: 50px; /* Adjust space between the logo and the form */
-  }
+/* LandingPage.css */
 
+
+.landing-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; 
+  height: 100vh; 
+  text-align: center; 
+}
+
+.icon img.logo {
+  max-width: 100%; 
+  height: auto; 
+}
+
+/* Style for buttons container */
+.landing-page .d-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; 
+  width: 100%;
+  max-width: 300px; 
+}
+
+/* Custom button styles */
 .landing-page .btn-custom {
   background-color: white;
   color: black;
   border-color: #ccc;
+  width: 100%; 
+  padding: 10px; 
 }
 
+/* Hover effect for buttons */
 .landing-page .btn-custom:hover {
   background-color: #d28119;
   color: white;
+}
+
+/* Ensure no additional margins are affecting the centering */
+body, html {
+  margin: 0;
+  padding: 0;
 }

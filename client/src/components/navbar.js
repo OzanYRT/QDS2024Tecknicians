@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 import { useAuth } from './AuthContext';
 import newLogo from '../assets/images/logo.webp';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGraduationCap, faRobot, faCog, faUser, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faGraduationCap, faRobot, faCog, faUser, faHeart, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -42,20 +42,16 @@ export default function Navbar() {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/settings">
-                <FontAwesomeIcon icon={faCog} /><br/>Settings
-              </NavLink>
-            </li>
-            <li className="nav-item">
               <NavLink className="nav-link" to="/profile">
                 <FontAwesomeIcon icon={faUser} /><br/>Profile
               </NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/attending">
-                Attending
-              </NavLink>
+               <FontAwesomeIcon icon={faHeart} /><br/>Attending
+             </NavLink>
             </li>
+
             <li className="nav-item">
               <NavLink className="nav-link" to="/logout">
                 <FontAwesomeIcon icon={faSignOutAlt} /><br/>Log Out
