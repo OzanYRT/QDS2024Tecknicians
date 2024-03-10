@@ -5,7 +5,7 @@ html, body {
 }
 
 body {
-  background: linear-gradient(to bottom, #FF8737, #FF9B64); /* Very subtle orange gradient */
+  background: linear-gradient(to bottom, #FF8737, #FF9B64);
 }
 
 
@@ -42,13 +42,78 @@ body {
   max-width: 400px;
   height: 75vh;
   background: #FFFFFF;
-  border-radius: 20px; /* Adjusted for consistency with the sample */
+  border-radius: 20px; 
   overflow: hidden;
   position: relative;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.75);
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   cursor: grab;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;
 }
+
+.card-image {
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover; 
+}
+
+.card-content {
+  text-align: center;
+  padding: 20px;
+  background: white;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+
+.card-container {
+  width: 90vw;
+  max-width: 400px;
+  height: 75vh;
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.card-container .card-image {
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%; /* Maintain 1:1 aspect ratio */
+  overflow: hidden;
+}
+
+.card-container .card-image img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.card-container .card-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px;
+  background: white;
+}
+
 
 .moving.tinder--card {
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.9);
@@ -109,7 +174,7 @@ body {
 
   .tinder--card {
     &:not(:first-child) {
-      display: none; /* Hide additional cards on larger screens */
+      display: none; 
     }
   }
 
