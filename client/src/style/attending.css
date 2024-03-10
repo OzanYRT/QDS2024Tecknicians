@@ -1,0 +1,10 @@
+/* Attending.css */
+.scholarships-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Adjust if needed to align content to the start */
+  padding: 20px;
+  margin-top: 40px; /* Increase top margin to ensure space at the top */
+  box-sizing: border-box;
+}

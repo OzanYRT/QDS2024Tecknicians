@@ -2,23 +2,28 @@
 html, body {
   height: 100%;
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* This will vertically center everything in the body */
+  flex-direction: column; /* Aligns children (like .tinder) in a column */
+  background: linear-gradient(to bottom, #ffd446, #f6a273) !important;
 }
-
-body {
-  background: linear-gradient(to bottom, #FF8737, #FF9B64);
-}
-
-
-
-
 
 .tinder {
+  margin-top: -45px;
+  width: 90vw; /* Adjusted to ensure it does not stretch too wide */
+  max-width: 400px; /* Keeps the maximum width */
   height: 75vh;
+  margin-left: 150px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   transition: opacity 0.1s ease-in-out;
+  opacity: 1; /* You might adjust this based on your loading logic */
 }
+
+/* Other styles remain the same */
+
 
 .loaded.tinder {
   opacity: 1;
@@ -38,20 +43,19 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background: #FFFFFF;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.75);
+  cursor: grab;
   width: 90vw;
   max-width: 400px;
   height: 75vh;
-  background: #FFFFFF;
-  border-radius: 20px; 
-  overflow: hidden;
-  position: relative;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.75);
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  cursor: grab;
-  display: flex;
-  flex-direction: column;
-  justify-content: center; 
-  align-items: center;
+  position: absolute; /* Important for stacking */
+  left: 50%;
+  /* Use JavaScript to dynamically adjust 'transform' based on the card's position in the stack */
+  transform-origin: bottom center;
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out; /* Adjusted for consistency */
 }
 
 .card-image {
@@ -65,7 +69,7 @@ body {
 .card-image img {
   max-width: 100%;
   max-height: 100%;
-  object-fit: cover; 
+  object-fit: cover;
 }
 
 .card-content {
@@ -86,6 +90,7 @@ body {
   position: relative;
   overflow: hidden;
   border-radius: 20px;
+  margin-right: 80px;
 }
 
 .card-container .card-image {
@@ -119,18 +124,51 @@ body {
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.9);
 }
 
-.tinder--card img {
-  height: auto;
+.tinder--card img.card-image {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  object-fit: cover;
+  height: 40%; /* Adjust based on how much of the top you want the image to cover */
+  object-fit: cover; /* Cover the designated area completely */
+  border-radius: 20px 20px 0 0; /* Round the top corners */
 }
 
-.tinder--card h3, .tinder--card p {
+/* Adjust the content styles so it does not overlap with the image */
+.tinder--card .card-content {
+  position: absolute;
+  top: 40%; /* Adjust based on the image height */
+  left: 0;
+  width: 100%;
+  padding: 20px;
+  background: white;
+  border-radius: 0 0 20px 20px; /* Round the bottom corners */
+}
+
+/* Center h3 text */
+.tinder--card h3 {
+  margin-top: 20px;
+  text-align: center; 
   padding: 10px 20px;
+}
+
+
+.tinder--card p {
+  text-align: center; 
+  padding: 10px 20px;
+  margin-bottom: 5px;
+}
+
+.tinder--card {
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center; 
 }
 
 .tinder--buttons {
   position: absolute;
+  margin-bottom: 10px;
   bottom: 5%;
   left: 50%;
   transform: translateX(-50%);
@@ -154,11 +192,12 @@ body {
 }
 
 .nope {
-  background-color: #ff5858;
+  background-color: #ff5858 !important;
+  
 }
 
 .love {
-  background-color: #4ccc64;
+  background-color: #4ccc64 !important;
 }
 
 @media (min-width: 992px) {
@@ -176,6 +215,7 @@ body {
     &:not(:first-child) {
       display: none; 
     }
+    margin-left:-80px;
   }
 
   .tinder--buttons {
@@ -183,5 +223,6 @@ body {
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
+    margin-left: 140px;
   }
 }

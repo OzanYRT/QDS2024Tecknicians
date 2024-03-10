@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "../style/navbar.css";
+import "../style/record.css"; 
 
 export default function RecordList() {
   const navigate = useNavigate();
@@ -23,21 +25,32 @@ export default function RecordList() {
       setResponse("Error fetching response.");
     }
   };
-  
+
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="prompt">Enter your prompt:</label>
-        <input
-          id="prompt"
-          type="text"
-          value={prompt}
-          onChange={handleInputChange}
-        />
-        <button type="submit">Submit</button>
-      </form>
-      {response && <div><p>Response:</p><p>{response}</p></div>}
+    <div className="record-page-container">
+      <div className="ai-message-container">
+        <p><b>This feature is powered by AI. By entering a prompt on what types of scholarships you want to see, this will customize your scholarship card stack!</b></p>
+      </div>
+
+      <div className="main-content">
+        <form onSubmit={handleSubmit}>
+          <div className="label-container">
+            <label htmlFor="prompt"><b>Enter your prompt: </b></label>
+          </div>
+          <br></br>
+          <input
+            id="prompt"
+            type="text"
+            value={prompt}
+            onChange={handleInputChange}
+            placeholder="Ex: Nursing scholarships"
+          />
+          <button type="submit">Submit</button>
+        </form>
+        <br></br>
+        {response && <div className="message"><p><b>Response:</b></p><p>{response}</p></div>}
+      </div>
     </div>
   );
 }
