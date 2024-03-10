@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from './AuthContext'; 
 
 function Login() {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
-  });
+  })
+  ;
 
+  const { login } = useAuth(); 
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -22,6 +25,7 @@ function Login() {
     try {
       const response = await axios.post('http://localhost:5050/api/login', formData);
       console.log(response.data);
+      login(); // Update login state
       navigate('/home');
     } catch (error) {
       console.error("Error logging in:", error.response.data);
