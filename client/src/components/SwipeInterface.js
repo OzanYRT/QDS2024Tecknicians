@@ -7,7 +7,7 @@ const SwipeInterface = () => {
   const [pods, setPods] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [cardStyle, setCardStyle] = useState({});
-  const [isMouseDown, setIsMouseDown] = useState(false); // Correctly placed inside the component
+  const [isMouseDown, setIsMouseDown] = useState(false); 
 
   useEffect(() => {
     setPods(scholarshipsData);
