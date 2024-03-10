@@ -1,5 +1,5 @@
 import json
-import convertjsontocsv
+from server.WebScraping_AutoFill import convertjsontocsv
 from server.WebScraping_AutoFill.JulieColeAutoComplete import *
 from server.WebScraping_AutoFill.helpfunctions import *
 
