@@ -1,5 +1,16 @@
 /* LandingPage.css */
 
+@keyframes riseUp {
+  from {
+    transform: translateY(50px); 
+    opacity: 0; 
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1; 
+  }
+}
+
 
 .landing-page {
   display: flex;
@@ -8,37 +19,50 @@
   margin-right: 250px;
   align-items: center; 
   height: 100vh; 
-  text-align: center; 
+  text-align: center;
+  animation: riseUp 0.5s ease-out forwards;
 }
 
 .icon img.logo {
-  max-width: 100%; 
+  width: 100%; 
   height: auto; 
+  animation-delay: 0.2s; 
 }
 
 /* Style for buttons container */
 .landing-page .d-grid {
   display: flex;
-  flex-direction: column;
-  gap: 20px; 
-  width: 100%;
-  max-width: 300px; 
+  flex-direction: row; 
+  gap: 20px;
+  width: auto;
+  max-width: 600px;
+  align-items: center;
+  marin: auto;
+  animation-delay: 0.4s;
+  justify-content: center; 
 }
+
 
 /* Custom button styles */
 .landing-page .btn-custom {
-  background-color: white;
-  color: black;
-  border-color: #ccc;
-  width: 100%; 
-  padding: 10px; 
+  padding: 10px 20px;
+  border: 2px solid white;
+  border-radius: 50px;
+  color: white;
+  background-color: transparent;
+  font-size: 16px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  width: auto; 
 }
 
-/* Hover effect for buttons */
 .landing-page .btn-custom:hover {
-  background-color: #d28119;
+  background-color: rgba(0, 0, 0, 0.75);
   color: white;
 }
+
+
 
 /* Ensure no additional margins are affecting the centering */
 body, html {
