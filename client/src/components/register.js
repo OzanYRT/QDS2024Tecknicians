@@ -8,10 +8,12 @@ function Register() {
     email: '',
     password: '',
     interests: '',
+    aboutme: '', // Include the aboutme field for formatted text
   });
 
   const navigate = useNavigate();
 
+  // Handle change for input fields
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -19,15 +21,18 @@ function Register() {
     });
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+
+    // Preparing the data for API call
+    // For aboutme as a formatted string, it's directly included in formData and sent as is
     try {
       const response = await axios.post('http://localhost:5050/api/register', formData);
       console.log(response.data);
-      navigate('/login');
+      navigate('/login'); // Navigate to login page upon successful registration
     } catch (error) {
-      console.error("Error registering:", error.response.data);
+      console.error("Error registering:", error.response ? error.response.data : 'An error occurred');
     }
   };
 
@@ -74,6 +79,16 @@ function Register() {
             onChange={handleChange}
           />
           <small>Separate interests with commas</small>
+        </div>
+        <div>
+          <label>About Me:</label>
+          <textarea
+            name="aboutme"
+            value={formData.aboutme}
+            onChange={handleChange}
+            rows="4"
+            style={{ width: '100%' }}
+          />
         </div>
         <button type="submit">Register</button>
       </form>
