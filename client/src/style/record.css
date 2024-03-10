@@ -1,0 +1,77 @@
+/* record.css */
+
+/* General reset and styles */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, #FF8737, #FF9B64);
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Main content container, similar to user-details-card */
+  .main-content {
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(5px);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 450px;
+    width: 90%;
+    margin: 20px;
+    box-sizing: border-box;
+  }
+  
+  /* Style for form inputs and buttons, similar to form-input and login-button */
+  input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #f0a038;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #d28119;
+  }
+  
+  /* Style for error/loading messages */
+  .message {
+    color: white;
+    font-size: 1rem;
+    text-align: center;
+  }
+  
+  /* Style overrides for links, similar to a in the provided snippet */
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .main-content {
+      padding: 1rem;
+      border-radius: 0.5rem;
+    }
+  }
+  

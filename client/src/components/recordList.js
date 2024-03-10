@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../style/navbar.css";
+import "../style/record.css"; 
 
 export default function RecordList() {
   const navigate = useNavigate();
