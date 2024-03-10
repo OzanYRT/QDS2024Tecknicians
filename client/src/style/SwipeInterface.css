@@ -215,7 +215,7 @@ html, body {
     &:not(:first-child) {
       display: none; 
     }
-    margin-left:-80px;
+    margin-left:-270px;
   }
 
   .tinder--buttons {
