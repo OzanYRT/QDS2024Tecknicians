@@ -1,17 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { useSwipeable } from 'react-swipeable';
+import { useLocation } from "react-router-dom";
 import '../style/SwipeInterface.css';
 import scholarshipsData from '../data/scholarships.json';
 
 const SwipeInterface = () => {
   const [pods, setPods] = useState([]);
+  const location = useLocation();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [cardStyle, setCardStyle] = useState({});
   const [isMouseDown, setIsMouseDown] = useState(false); // Correctly placed inside the component
 
   useEffect(() => {
-    setPods(scholarshipsData);
-  }, []);
+    if (location.state && location.state.scholarships) {
+      // Assuming scholarship names are unique identifiers
+      console.log("Names from response:", location.state.scholarships);
+      console.log("Names in scholarshipsData:", scholarshipsData.map(s => s.name));
+
+      const filteredPods = scholarshipsData.filter(scholarship => 
+        location.state.scholarships.map(name => name.toLowerCase()).includes(scholarship.name.toLowerCase())
+      );      
+      console.log("Filtered Pods:", filteredPods.map(fp => fp.name));
+      setPods(filteredPods);
+    } else {
+      // Fallback to showing all scholarships or handle this scenario as needed
+      setPods(scholarshipsData);
+    }
+  }, [location.state]);
 
   const swipingHandler = (eventData) => {
     const { deltaX, deltaY } = eventData;
