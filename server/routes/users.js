@@ -2,6 +2,7 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 const path = require('path');
+const fs = require('fs');
 
 const router = express.Router();
 
@@ -171,11 +172,11 @@ const { exec } = require('child_process');
 router.get('/generatePdf', (req, res) => {
   // Call the process_scholarships.py script to generate the PDF
   const { scholarshipName, userData } = req.query; // Extract the scholarship name and user data from query parameters
-  exec('python ../process_scholarships.py', (error, stdout, stderr) => {
-    if (error) {
-      console.error(`exec error: ${error}`);
-      return res.status(500).send('Error generating the PDF');
-    }
+    exec(`python ../process_scholarships.py "${scholarshipName}" '${userData}'`, (error, stdout, stderr) => {
+        if (error) {
+            console.error(`exec error: ${error}`);
+            return res.status(500).send('Error generating the PDF');
+        }
 
     // Define the path to the PDF file
     const pdfPath = path.join(__dirname, '../scholarship_essay.pdf');
