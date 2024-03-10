@@ -1,4 +1,16 @@
 /* Swipe Interface Styles */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: linear-gradient(to bottom, #FF8737, #FF9B64); /* Very subtle orange gradient */
+}
+
+
+
+
 
 .tinder {
   height: 75vh;
