@@ -2,33 +2,42 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 export default function Page1() {
-  // State to hold user data
-  const [user, setUser] = useState(null); // Changed to null for initial loading check
+  const [user, setUser] = useState(null); // Holds the fetched user data
+  const [error, setError] = useState(''); // Holds any error messages
 
-  // Effect hook to fetch user data on component mount
   useEffect(() => {
     const fetchData = async () => {
+      // Retrieve the email from localStorage
+      const email = localStorage.getItem('email');
+      if (!email) {
+        setError('No email found. Please log in.'); // Set an error if the email is missing
+        return;
+      }
+
       try {
-        // Ensure this endpoint returns the aboutme field with the user data
-        const response = await axios.get('http://localhost:5050/api/bigmonke@monke.com');
-        setUser(response.data); // Update state with fetched data
+        // Fetch user data by email
+        const response = await axios.get(`http://localhost:5050/api/${email}`);
+        setUser(response.data); // Update state with fetched user data
       } catch (error) {
         console.error('Error fetching user data:', error);
+        setError('Failed to fetch user data. Please try again.'); // Set an error if fetching fails
       }
     };
 
     fetchData();
-  }, []); // Dependency array left empty to run once on mount
+  }, []);
 
+  // Render user data or appropriate message based on the state
   return (
     <div>
-      {user ? (
+      {error ? (
+        <p>{error}</p>
+      ) : user ? (
         <div>
           <h1>Welcome, {user.username}</h1>
           <p>Email: {user.email}</p>
           <p>Interests: {user.interests?.join(', ')}</p>
-          {/* Ensure "About Me" displays even if it's empty or not present */}
-          <p>About Me: {user.aboutme || ''}</p>
+          <p>About Me: {user.aboutme || 'No additional information provided.'}</p>
         </div>
       ) : (
         <p>Loading user data...</p>
