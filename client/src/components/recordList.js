@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "../style/navbar.css";
 
 export default function RecordList() {
   const navigate = useNavigate();
@@ -23,17 +24,17 @@ export default function RecordList() {
       setResponse("Error fetching response.");
     }
   };
-  
+
 
   return (
-    <div>
+    <div className="main-content"> {/* Changed from id to className */}
       <form onSubmit={handleSubmit}>
         <label htmlFor="prompt">Enter your prompt:</label>
         <input
-          id="prompt"
-          type="text"
-          value={prompt}
-          onChange={handleInputChange}
+            id="prompt"
+            type="text"
+            value={prompt}
+            onChange={handleInputChange}
         />
         <button type="submit">Submit</button>
       </form>

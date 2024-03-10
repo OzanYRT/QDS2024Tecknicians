@@ -20,8 +20,7 @@
 
   .navbar {
     margin-bottom: 80px !important;
-
-    position: fixed; 
+    position: fixed;
     top: 0;
     left: 0;
     width: 250px; 
@@ -31,16 +30,22 @@
     align-items: center; /* Center align items */
     padding: 20px; 
     overflow-y: auto;
+    z-index: 1000;
   }
  
 
+    .login-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
 
   .navbar-nav {
     flex-direction: column !important; 
     width: 100%; 
     align-items: center;
     margin-bottom: 80px !important;
-
   }
   
   .nav-link {
@@ -56,6 +61,10 @@
 
   .nav-item:not(:last-child) {
     margin-bottom: 10px;
+  }
+
+  .main-content {
+      margin-left: 250px;
   }
 }
 
