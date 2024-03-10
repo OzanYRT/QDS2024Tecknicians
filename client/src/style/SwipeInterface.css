@@ -6,7 +6,7 @@ html, body {
   justify-content: center;
   align-items: center; /* This will vertically center everything in the body */
   flex-direction: column; /* Aligns children (like .tinder) in a column */
-  background: linear-gradient(to bottom, #FF8737, #FF9B64);
+  background: linear-gradient(to bottom, #ffd446, #f6a273);
 }
 
 .tinder {
