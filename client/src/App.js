@@ -13,6 +13,7 @@ import Page2 from "./components/page2";
 import LandingPage from "./components/LandingPage";
 import Profile from "./components/profile";
 import Attending from "./components/attending";
+import LogoutButton from "./components/logout";
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
           <Route path="page1" element={<Page1 />} />
           <Route path="page2" element={<Page2 />} />
           <Route path="attending" element={<Attending />} />
+          <Route path="logout" element={<LogoutButton />} />
       </Route>
     </Routes>
   );
