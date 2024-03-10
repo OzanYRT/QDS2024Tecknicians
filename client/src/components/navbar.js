@@ -50,6 +50,11 @@ export default function Navbar() {
               </NavLink>
             </li>
             <li className="nav-item">
+              <NavLink className="nav-link" to="/attending">
+                Attending
+              </NavLink>
+            </li>
+            <li className="nav-item">
               <NavLink className="nav-link" to="/logout">
                 Log Out
               </NavLink>

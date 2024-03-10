@@ -6,6 +6,8 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   interests: [String],
   aboutme: { type: String},
+  // collection of scholarships that the user is interested in
+  scholarships: [String],
 });
 
 const User = mongoose.model('User', userSchema);
