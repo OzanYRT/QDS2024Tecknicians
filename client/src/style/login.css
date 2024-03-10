@@ -1,23 +1,27 @@
 /* Login container */
 .login-container {
     display: flex;
+    flex-direction: column; /* This will stack the logo and form vertically */
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: linear-gradient(to bottom, #FF8737, #FF9B64);
-
+    /*background: linear-gradient(to bottom, #FF8737, #f6a273);*/
+    /*background: linear-gradient(to bottom, #0c4569, #FF9B64);*/
+    /*background: linear-gradient(to bottom, #FF9B64, #FFFFFF);*/
+    background: linear-gradient(to bottom, #ffd446, #f6a273);
   }
   
   .icon {
-    width: 100px;
-    height: 100px;
-    margin-bottom: 20px;
+    display: flex;
+    justify-content: center; /* Center the logo horizontally */ /* Ensure the div takes up the full width of its container */
+    margin-bottom: 50px; /* Adjust space between the logo and the form */
   }
+
   
   /* Form container */
   .form-container {
     background-color: #fff;
-    padding: 40px;
+    padding: 60px;
     border-radius: 10px;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); /* Box shadow for depth */
     max-width: 400px; /* Limit form width for better readability */
@@ -26,9 +30,9 @@
   
   /* Form title */
   .form-title {
-    font-size: 24px;
+    font-size: 34px;
     color: #333; /* Instagram default text color */
-    margin-bottom: 20px;
+    margin-bottom: 40px;
   }
   
   /* Form input fields */
@@ -45,7 +49,7 @@
   .login-button {
     width: 100%;
     padding: 12px;
-    background-color: #3897f0; /* Instagram primary color */
+    background-color: #f0a038 !important; /* Instagram primary color */
     border: none;
     border-radius: 5px;
     color: #fff; /* Button text color */
@@ -55,6 +59,7 @@
   }
   
   .login-button:hover {
-    background-color: #1e70b8; /* Darker color on hover */
+    /*background-color: #1e70b8; !* Darker color on hover *!*/
+    background-color: #d28119 !important;
   }
   

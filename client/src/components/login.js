@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext'; 
 import '../style/login.css'; // Import your CSS file
-import newLogo from '../assets/images/logo.webp'; 
+import newLogo from '../assets/images/glow_6.png';
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -37,35 +37,35 @@ function Login() {
   return (
     <div className="login-container">
       <div className="icon">
-        <img src={newLogo} alt="logo" className="logo" />       
+        <img src={newLogo} alt="logo" className="logo" />
       </div>
       <div className="form-container">
         <h2 className="form-title">Login</h2>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className="form-input"
-              placeholder="Email"
-              required
-            />
-          </div>
-          <div>
-            <input
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              className="form-input"
-              placeholder="Password"
-              required
-            />
-          </div>
-          <button type="submit" className="login-button">Login</button>
-        </form>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="form-input"
+                placeholder="Email"
+                required
+              />
+            </div>
+            <div>
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                className="form-input"
+                placeholder="Password"
+                required
+              />
+            </div>
+            <button type="submit" className="login-button">Login</button>
+          </form>
       </div>
     </div>
   );
