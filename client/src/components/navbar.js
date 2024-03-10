@@ -14,7 +14,7 @@ export default function Navbar() {
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <NavLink className="navbar-brand" to="/">
+        <NavLink className="navbar-brand" to="/home">
         <img style={{ width: '70%' }} src={newLogo} alt="logo" />        </NavLink>
         <button
           className="navbar-toggler"
@@ -30,12 +30,12 @@ export default function Navbar() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ml-auto">
             <li className="nav-item">
-              <NavLink className="nav-link" to="/record">
+              <NavLink className="nav-link" to="/page1">
                 My Scholarships
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/page1">
+              <NavLink className="nav-link" to="/record">
                 ScholarAi
               </NavLink>
             </li>
