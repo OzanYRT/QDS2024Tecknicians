@@ -4,12 +4,27 @@ import { useLocation } from "react-router-dom";
 import '../style/SwipeInterface.css';
 import scholarshipsData from '../data/scholarships.json';
 
+// Function to import all images from a given context
+function importAll(r) {
+  return r.keys().map(r);
+}
+
+// Importing all images from the cardPics folder
+const images = importAll(require.context('../assets/images/cardPics', false, /\.(png|jpe?g|svg|webp)$/));
+
 const SwipeInterface = () => {
   const [pods, setPods] = useState([]);
   const location = useLocation();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [cardStyle, setCardStyle] = useState({});
   const [isMouseDown, setIsMouseDown] = useState(false); 
+
+
+  // Function to get a random image for a card
+  const getRandomImage = () => {
+    const randomIndex = Math.floor(Math.random() * images.length);
+    return images[randomIndex];
+  };
 
   useEffect(() => {
     if (location.state && location.state.scholarships) {
@@ -108,15 +123,25 @@ const SwipeInterface = () => {
     <div className="tinder">
       <div id="stack" className="tinder--cards">
         {pods.length > 0 && currentIndex < pods.length ? (
-          <div className={`tinder--card ${isMouseDown ? 'moving' : ''}`} {...handlers} style={cardStyle}>
-            <h3>{pods[currentIndex].name}</h3>
-            <p>{pods[currentIndex].amount}</p>
-            <p>Deadline: {pods[currentIndex].deadline}</p>
-          </div>
+          pods.map((pod, index) => (
+            <div
+              key={pod.id}
+              className={`tinder--card ${index === currentIndex ? 'top' : ''} ${isMouseDown ? 'moving' : ''}`}
+              {...handlers}
+              style={{ ...cardStyle, zIndex: pods.length - index }}
+            >
+              <img src={getRandomImage()} alt="Card" className="card-image" />
+              <h3>{pod.name}</h3>
+              <p>{pod.amount}</p>
+              <p>Deadline: {pod.deadline}</p>
+              {/* Other content */}
+            </div>
+          ))
         ) : (
           <div className="empty-message">No more scholarships.</div>
         )}
       </div>
+
 
       <div className="tinder--buttons">
         <button id="nope" className="button nope" onClick={() => moveCard('left')} disabled={currentIndex >= pods.length - 1}>

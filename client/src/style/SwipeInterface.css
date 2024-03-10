@@ -56,6 +56,10 @@ html, body {
   flex-direction: column;
   justify-content: center; 
   align-items: center;
+  top: 0; /* Align cards to the top */
+  left: 50%; /* Center cards horizontally */
+  transform: translate(-50%, 0) scale(1); /* Center the first card */
+  transform-origin: bottom center;
 }
 
 .card-image {
@@ -123,14 +127,24 @@ html, body {
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.9);
 }
 
-.tinder--card img {
-  height: auto;
-  width: 100%;
-  object-fit: cover;
+.tinder--card img.card-image {
+  width: 100%; /* Or any other size */
+  max-height: 200px; /* Adjust as necessary */
+  object-fit: cover; /* To cover the area without losing aspect ratio */
+  border-radius: 20px 20px 0 0; /* Rounded corners on top */
 }
 
-.tinder--card h3, .tinder--card p {
+.tinder--card h3 {
   padding: 10px 20px;
+  text-align: center; 
+}
+
+
+.tinder--card {
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center; 
 }
 
 .tinder--buttons {
