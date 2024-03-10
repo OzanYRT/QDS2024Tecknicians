@@ -21,6 +21,7 @@ function Login() {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:5050/api/login', formData);
+      localStorage.setItem('email', formData.email);
       console.log(response.data);
       navigate('/home');
     } catch (error) {

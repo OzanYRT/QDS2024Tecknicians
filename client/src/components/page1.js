@@ -7,19 +7,16 @@ export default function Page1() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const token = localStorage.getItem('token'); // Retrieve the stored JWT token
-      if (!token) {
-        setError('No session token found. Please log in.'); // Set an error if the token is missing
+      // Retrieve the email from localStorage
+      const email = localStorage.getItem('email');
+      if (!email) {
+        setError('No email found. Please log in.'); // Set an error if the email is missing
         return;
       }
 
       try {
-        const response = await axios.get('http://localhost:5050/user-data', {
-          headers: {
-            Authorization: `Bearer ${token}`, // Include the token in the Authorization header
-          },
-        });
-
+        // Fetch user data by email
+        const response = await axios.get(`http://localhost:5050/api/${email}`);
         setUser(response.data); // Update state with fetched user data
       } catch (error) {
         console.error('Error fetching user data:', error);
