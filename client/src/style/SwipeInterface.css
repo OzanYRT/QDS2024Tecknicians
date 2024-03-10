@@ -80,8 +80,6 @@ html, body {
   box-sizing: border-box;
 }
 
-
-
 .card-container {
   width: 90vw;
   max-width: 400px;
@@ -148,22 +146,22 @@ html, body {
 /* Center h3 text */
 .tinder--card h3 {
   margin-top: 20px;
-  text-align: center; 
+  text-align: center;
   padding: 10px 20px;
 }
 
 
 .tinder--card p {
-  text-align: center; 
+  text-align: center;
   padding: 10px 20px;
   margin-bottom: 5px;
 }
 
 .tinder--card {
-  display: flex; 
-  flex-direction: column; 
-  justify-content: center; 
-  align-items: center; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .tinder--buttons {
@@ -193,7 +191,7 @@ html, body {
 
 .nope {
   background-color: #ff5858 !important;
-  
+
 }
 
 .love {
@@ -213,9 +211,9 @@ html, body {
 
   .tinder--card {
     &:not(:first-child) {
-      display: none; 
+      display: none;
     }
-    margin-left:-80px;
+    margin-left:-270px;
   }
 
   .tinder--buttons {

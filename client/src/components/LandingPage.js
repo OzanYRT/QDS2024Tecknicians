@@ -9,7 +9,7 @@ const LandingPage = () => {
       <div className="icon">
         <img src={newLogo} alt="logo" className="logo" />
       </div>
-      <div className="d-grid gap-2 col-6 mx-auto">
+      <div>
         <Link to="/login" className="btn btn-primary btn-custom">Login</Link>
         <Link to="/register" className="btn btn-secondary btn-custom">Register</Link>
       </div>
